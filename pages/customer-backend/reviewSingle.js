@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CustomerReview from '../../components/customerReview';
 import modelStyle from '../../styles/model.module.css';
+import axios from 'axios';
 
 function ReviewSingle({ reviewData }) {
   const [showReviewForm, setShowReviewForm] = useState(false);
@@ -18,31 +19,45 @@ function ReviewSingle({ reviewData }) {
         <h4>Review for {reviewData?.model_name || 'Andrea Sherri Parton'}</h4>
         <p>Service Date: {reviewData?.service_date || 'Recent'}</p>
       </div>
-      
+
       {!reviewSubmitted && !showReviewForm && (
-        <button 
+        <button
           onClick={() => setShowReviewForm(true)}
           className={modelStyle.reviewButton}
         >
           Write Review
         </button>
       )}
-      
+
       {showReviewForm && (
-        <CustomerReview 
+        <CustomerReview
           orderId={reviewData?.order_id}
           modelId={reviewData?.model_id}
           modelName={reviewData?.model_name || 'Andrea Sherri Parton'}
           onReviewSubmitted={handleReviewSubmitted}
         />
       )}
-      
+
       {reviewSubmitted && (
         <div className={modelStyle.reviewCompleted}>
           ✅ Review completed - Thank you for your feedback!
         </div>
       )}
     </div>
+  );
+}
+
+function ReviewSingle() {
+
+  return (
+    <tr>
+      <td>
+        <form>
+          {/* Form content would go here */}
+        </form>
+      </td>
+      <td>Provide Review to Andrea Sherri Parton</td>
+    </tr>
   );
 }
 
